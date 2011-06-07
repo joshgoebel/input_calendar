@@ -150,5 +150,3 @@ class DateHelper
     @setTime new Date(@valueOf()+1000*60*60*24)
   @go_yesterday = ->
     @setTime new Date(@valueOf()-1000*60*60*24)
-
-`this.Cal = Calendar`

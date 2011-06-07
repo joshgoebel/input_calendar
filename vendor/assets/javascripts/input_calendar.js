@@ -224,5 +224,4 @@
     };
     return DateHelper;
   })();
-  this.Cal = Calendar;
 }).call(this);
