@@ -4,6 +4,10 @@ At the current time __input_calendar__ is optimized for static calendars that st
 
 Interesting in patches to make it more configurable as long as it stays simple and elegant.
 
+Here is what it looks like with the default CSS:
+
+![sample of input_calendar_](https://raw.github.com/yyyc514/input_calendar/master/example.png)
+
 ## How to use
 
 In your view:
