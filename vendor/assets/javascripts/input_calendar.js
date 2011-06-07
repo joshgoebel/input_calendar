@@ -20,6 +20,9 @@
       } else {
         _base["class"] = "minicalendar";
       };
+      if (this.options.footer) {
+        this.footerTemplate = _.template(this.options.footer);
+      }
       this.date = new Date;
       this.getDateFromField();
       this.pager_date = new Date(this.date);
@@ -175,12 +178,23 @@
       }
       return false;
     };
-    Calendar.prototype.currentDateString = function() {
-      return "<b>" + this.DAYS[this.date.getDay()] + "</b><br />" + this.MONTHS[this.date.getMonth()].label + " " + (this.date.getDate()) + ", " + (this.date.getFullYear());
+    Calendar.prototype.generateFooter = function() {
+      var params;
+      if (this.footerTemplate) {
+        params = {
+          day: this.date.getDate(),
+          month: this.MONTHS[this.date.getMonth()].label,
+          day_of_week: this.DAYS[this.date.getDay()],
+          year: this.date.getFullYear()
+        };
+        return this.footerTemplate(params);
+      } else {
+        return "<b>" + this.DAYS[this.date.getDay()] + "</b><br />" + this.MONTHS[this.date.getMonth()].label + " " + (this.date.getDate()) + ", " + (this.date.getFullYear());
+      }
     };
     Calendar.prototype.redraw = function() {
       var html;
-      html = "<table class=\"" + this.options["class"] + "\" cellspacing=\"0\">\n<thead>  \n   <tr><th class=\"back\"><a href=\"#\">&larr;</a></th>\n       <th colspan=\"5\" class=\"month_label\">" + (this.label()) + "</th>\n       <th class=\"forward\"><a href=\"#\">&rarr;</a></th></tr>\n   <tr class=\"day_header\">" + (this.dayRows()) + "</tr>\n </thead>\n <tbody>" + (this.buildDateCells()) + "</tbody>\n <tfoot>\n   <tr><td colspan=\"7\" class=\"selectedtext\">" + (this.currentDateString()) + "</td></tr>\n </tfoot>\n </table>";
+      html = "<table class=\"" + this.options["class"] + "\" cellspacing=\"0\">\n<thead>  \n   <tr><th class=\"back\"><a href=\"#\">&larr;</a></th>\n       <th colspan=\"5\" class=\"month_label\">" + (this.label()) + "</th>\n       <th class=\"forward\"><a href=\"#\">&rarr;</a></th></tr>\n   <tr class=\"day_header\">" + (this.dayRows()) + "</tr>\n </thead>\n <tbody>" + (this.buildDateCells()) + "</tbody>\n <tfoot>\n   <tr><td colspan=\"7\" class=\"selectedtext\">" + (this.generateFooter()) + "</td></tr>\n </tfoot>\n </table>";
       this.element.html(html);
       this.element.find("th.back").click(__bind(function() {
         return this.back();

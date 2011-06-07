@@ -23,6 +23,12 @@ Or avoid the inline JS with some jQuery (coffeescript) somewhere:
 
 * class - custom CSS class (or multiple classes)
 * onchange - function that is called each time a date is selected
+* footer - underscore.js style template string for the footer
+  * Supports: month (full name), day, year, day_of_week (full name)
+
+Example of using footer:
+
+    Calendar.attach("event_date", {footer: "<strong>Due by:</strong> <%= month %> <%= day %>, <%= year %>"})
 
 ## Installing
     

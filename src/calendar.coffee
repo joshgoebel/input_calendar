@@ -10,6 +10,8 @@ class @Calendar
       @element=$("<div>").insertAfter(@field)
     @show()
     @options["class"] ?= "minicalendar"
+    if @options.footer
+      @footerTemplate = _.template @options.footer
     # default to today before we try and fetch from the field
     @date = new Date
     @getDateFromField()
@@ -111,8 +113,16 @@ class @Calendar
       @options.onchange(@field.val())
     false
   
-  currentDateString: ->
-    "<b>#{@DAYS[@date.getDay()]}</b><br />#{@MONTHS[@date.getMonth()].label} #{@date.getDate()}, #{@date.getFullYear()}"
+  generateFooter: ->
+    if @footerTemplate
+      params = 
+        day: @date.getDate()
+        month: @MONTHS[@date.getMonth()].label
+        day_of_week: @DAYS[@date.getDay()]
+        year: @date.getFullYear()
+      @footerTemplate(params)
+    else
+      "<b>#{@DAYS[@date.getDay()]}</b><br />#{@MONTHS[@date.getMonth()].label} #{@date.getDate()}, #{@date.getFullYear()}"
 
   redraw: () ->
     html = """<table class="#{@options["class"]}" cellspacing="0">
@@ -124,7 +134,7 @@ class @Calendar
                 </thead>
                 <tbody>#{@buildDateCells()}</tbody>
                 <tfoot>
-                  <tr><td colspan="7" class="selectedtext">#{@currentDateString()}</td></tr>
+                  <tr><td colspan="7" class="selectedtext">#{@generateFooter()}</td></tr>
                 </tfoot>
                 </table>"""
     @element.html html
