@@ -1,0 +1,54 @@
+table.minicalendar
+{
+  border-collapse:collapse;
+  border:2px solid #aaa;
+}
+
+table.minicalendar tr td
+{
+  padding:3px;
+  background:white;
+}
+
+table.minicalendar tr th
+{
+  text-align:center;
+}
+
+table.minicalendar tr td.today
+{
+  background:#CDD9EB;
+}
+
+table.minicalendar tr td.othermonth
+{
+  background:#eee;
+}
+
+table.minicalendar tr td.othermonth a { color:#999;}
+
+table.minicalendar td.day
+{
+  text-align:center;
+  font-size:0.8em;
+  cursor:pointer;
+}
+
+table.minicalendar td.selected
+{
+  background:#000 !important;
+}
+
+table.minicalendar td.day a { text-decoration:none; }
+table.minicalendar td.selected a { color:white;   color:gold; }
+
+table.minicalendar tfoot tr td
+{
+  text-align:center;
+  font-size:0.8em;
+  padding:5px 0;
+}
+table.minicalendar tfoot tr td b
+{
+  color:#111;
+}
