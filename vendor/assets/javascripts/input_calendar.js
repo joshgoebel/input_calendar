@@ -34,7 +34,7 @@
       var date;
       date = this.field.val().split(" ")[0];
       return date.split("-").map(function(x) {
-        return parseInt(x);
+        return parseInt(x.replace(/^0/, ""));
       });
     };
     Calendar.prototype.show = function() {

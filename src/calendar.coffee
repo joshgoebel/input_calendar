@@ -26,7 +26,7 @@ class @Calendar
   parseIncomingDate: () ->
     # cut off the time element
     date=@field.val().split(" ")[0] 
-    date.split("-").map (x) -> parseInt(x)
+    date.split("-").map (x) -> parseInt(x.replace(/^0/,""))
 
   show: () -> @element.show()
   hide: () -> @element.hide()
