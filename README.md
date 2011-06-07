@@ -1,13 +1,29 @@
 # input_calendar
 
+At the current time __input_calendar__ is optimized for static calendars that stay in place and are used in place (how I usually prefer a calendar in apps).  No reason it couldn't be enhanced to hide/show dynamically and support visible date fields.
+
+Interesting in patches to make it more configurable as long as it stays simple and elegant.
+
 ## How to use
 
 In your view:
 
     <% form_for @event do |f| %>
-      <%= f.hidden_field :date %>
+      <%= f.hidden_field :date, :class => "calendar" %>
       <%= javascript_tag "Calendar.attach('event_date')" %>
     <% end %>
+    
+Or avoid the inline JS with some jQuery (coffeescript) somewhere:
+
+    $(document).ready -> 
+      $("input.calendar").each (i, o) -> 
+        Calendar.attach(o)
+
+## Options you can pass attach
+
+TODO: Write up options here
+
+## Installing
     
 ### Requirements
 
@@ -40,6 +56,7 @@ Add to your Gemfile:
     
 Then copy the files locally:
 
+    bundle install
     bundle exec rake input_calendar:copy_files
     
 Should give you:
