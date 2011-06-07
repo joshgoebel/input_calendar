@@ -1,6 +1,6 @@
 # input_calendar
 
-At the current time __input_calendar__ is optimized for static calendars that stay in place and are used in place (how I usually prefer a calendar in apps).  No reason it couldn't be enhanced to hide/show dynamically and support visible date fields.
+At the current time input_calendar is optimized for calendars that stay in place and are used in place (how I usually prefer a calendar in apps).  No reason it couldn't be enhanced to hide/show dynamically and support visible date fields.
 
 Interesting in patches to make it more configurable as long as it stays simple and elegant.
 
