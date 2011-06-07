@@ -9,6 +9,7 @@ class @Calendar
     else
       @element=$("<div>").insertAfter(@field)
     @show()
+    @options["class"] ?= "minicalendar"
     # default to today before we try and fetch from the field
     @date = new Date
     @getDateFromField()
@@ -114,7 +115,7 @@ class @Calendar
     "<b>#{@DAYS[@date.getDay()]}</b><br />#{@MONTHS[@date.getMonth()].label} #{@date.getDate()}, #{@date.getFullYear()}"
 
   redraw: () ->
-    html = """<table class="minicalendar" cellspacing="0">
+    html = """<table class="#{@options["class"]}" cellspacing="0">
                <thead>  
                   <tr><th class="back"><a href="#">&larr;</a></th>
                       <th colspan="5" class="month_label">#{@label()}</th>

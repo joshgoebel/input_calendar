@@ -4,6 +4,7 @@
   $ = jQuery;
   this.Calendar = (function() {
     function Calendar(id, field, options) {
+      var _base, _ref;
       this.id = id;
       this.field = field;
       this.options = options != null ? options : {};
@@ -14,6 +15,11 @@
         this.element = $("<div>").insertAfter(this.field);
       }
       this.show();
+            if ((_ref = (_base = this.options)["class"]) != null) {
+        _ref;
+      } else {
+        _base["class"] = "minicalendar";
+      };
       this.date = new Date;
       this.getDateFromField();
       this.pager_date = new Date(this.date);
@@ -174,7 +180,7 @@
     };
     Calendar.prototype.redraw = function() {
       var html;
-      html = "<table class=\"minicalendar\" cellspacing=\"0\">\n<thead>  \n   <tr><th class=\"back\"><a href=\"#\">&larr;</a></th>\n       <th colspan=\"5\" class=\"month_label\">" + (this.label()) + "</th>\n       <th class=\"forward\"><a href=\"#\">&rarr;</a></th></tr>\n   <tr class=\"day_header\">" + (this.dayRows()) + "</tr>\n </thead>\n <tbody>" + (this.buildDateCells()) + "</tbody>\n <tfoot>\n   <tr><td colspan=\"7\" class=\"selectedtext\">" + (this.currentDateString()) + "</td></tr>\n </tfoot>\n </table>";
+      html = "<table class=\"" + this.options["class"] + "\" cellspacing=\"0\">\n<thead>  \n   <tr><th class=\"back\"><a href=\"#\">&larr;</a></th>\n       <th colspan=\"5\" class=\"month_label\">" + (this.label()) + "</th>\n       <th class=\"forward\"><a href=\"#\">&rarr;</a></th></tr>\n   <tr class=\"day_header\">" + (this.dayRows()) + "</tr>\n </thead>\n <tbody>" + (this.buildDateCells()) + "</tbody>\n <tfoot>\n   <tr><td colspan=\"7\" class=\"selectedtext\">" + (this.currentDateString()) + "</td></tr>\n </tfoot>\n </table>";
       this.element.html(html);
       this.element.find("th.back").click(__bind(function() {
         return this.back();

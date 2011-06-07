@@ -10,7 +10,7 @@ In your view:
 
     <% form_for @event do |f| %>
       <%= f.hidden_field :date, :class => "calendar" %>
-      <%= javascript_tag "Calendar.attach('event_date')" %>
+      <%= javascript_tag "Calendar.attach('event_date', {class: 'mycustomcssclass'})" %>
     <% end %>
     
 Or avoid the inline JS with some jQuery (coffeescript) somewhere:
@@ -21,7 +21,8 @@ Or avoid the inline JS with some jQuery (coffeescript) somewhere:
 
 ## Options you can pass attach
 
-TODO: Write up options here
+* class - custom CSS class (or multiple classes)
+* onchange - function that is called each time a date is selected
 
 ## Installing
     
