@@ -9,6 +9,8 @@ class @Calendar
     else
       @element=$("<div>").insertAfter(@field)
     @show()
+    # default to today before we try and fetch from the field
+    @date = new Date
     @getDateFromField()
     @pager_date = new Date(@date)
     @redraw()
@@ -17,16 +19,16 @@ class @Calendar
     new Calendar(null, field, options)
 
   getDateFromField: () ->
-    @date = new Date
     return if @field.val() == ""
-    [year, month, day] = @parseIncomingDate()
-    @date = new Date(year, month-1, day)
+    @date = @parseIncomingDate()
 
   # should override this in a subclass if you're date string looks different
   parseIncomingDate: () ->
-    # cut off the time element
+    # cut off the time part of the date element
     date=@field.val().split(" ")[0] 
-    date.split("-").map (x) -> parseInt(x.replace(/^0/,""))
+    [year, month, day] = _.map(date.split("-"), (x) -> 
+      parseInt x.replace /^0/, "")
+    new Date(year, month-1, day)
 
   show: () -> @element.show()
   hide: () -> @element.hide()

@@ -14,6 +14,7 @@
         this.element = $("<div>").insertAfter(this.field);
       }
       this.show();
+      this.date = new Date;
       this.getDateFromField();
       this.pager_date = new Date(this.date);
       this.redraw();
@@ -22,20 +23,18 @@
       return new Calendar(null, field, options);
     };
     Calendar.prototype.getDateFromField = function() {
-      var day, month, year, _ref;
-      this.date = new Date;
       if (this.field.val() === "") {
         return;
       }
-      _ref = this.parseIncomingDate(), year = _ref[0], month = _ref[1], day = _ref[2];
-      return this.date = new Date(year, month - 1, day);
+      return this.date = this.parseIncomingDate();
     };
     Calendar.prototype.parseIncomingDate = function() {
-      var date;
+      var date, day, month, year, _ref;
       date = this.field.val().split(" ")[0];
-      return date.split("-").map(function(x) {
+      _ref = _.map(date.split("-"), function(x) {
         return parseInt(x.replace(/^0/, ""));
-      });
+      }), year = _ref[0], month = _ref[1], day = _ref[2];
+      return new Date(year, month - 1, day);
     };
     Calendar.prototype.show = function() {
       return this.element.show();
