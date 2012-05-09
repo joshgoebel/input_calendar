@@ -3,7 +3,9 @@ $ = jQuery
 class @Calendar
   # only syntax takes both the id and field
   constructor: (@id, @field, @options = {}) ->
-    @field=$("##{@field}")
+    # allow us to be passed in a jquery object already
+    unless @field.jquery
+      @field=$("##{@field}")
     if @id?
       @element=$("##{@id}")
     else
@@ -108,7 +110,7 @@ class @Calendar
     @field.val(@date.toLocaleDateString())
     @element.find(".selected").removeClass "selected"
     o.parent().addClass("selected")
-    @element.find(".selectedtext").html @currentDateString()
+    @element.find(".selectedtext").html @generateFooter()
     if @options.onchange
       @options.onchange(@field.val())
     false
