@@ -166,7 +166,7 @@
       if (date.getMonth() !== month) classes.push("othermonth");
       if (date.same_as(new Date())) classes.push("today");
       if (date.same_as(this.date)) classes.push("selected");
-      return "<td class='" + (classes.join(" ")) + "'><a data-date='" + (date.toLocaleString()) + "' href='#'>" + (date.getDate()) + "</a></td>";
+      return "<td class='" + (classes.join(" ")) + "'><a data-date='" + (date.toDateString()) + "' href='#'>" + (date.getDate()) + "</a></td>";
     };
 
     Calendar.prototype.clicked = function(event) {

@@ -99,7 +99,7 @@ class @Calendar
       classes.push("othermonth") if date.getMonth() != month
       classes.push("today") if date.same_as(new Date())
       classes.push("selected") if date.same_as(@date)
-      "<td class='#{classes.join(" ")}'><a data-date='#{date.toLocaleString()}' href='#'>#{date.getDate()}</a></td>"
+      "<td class='#{classes.join(" ")}'><a data-date='#{date.toDateString()}' href='#'>#{date.getDate()}</a></td>"
 
   clicked: (event) ->
     o=$(event.target)
