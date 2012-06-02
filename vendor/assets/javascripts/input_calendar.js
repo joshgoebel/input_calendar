@@ -140,7 +140,7 @@
       date.setDate(1);
       month = this.pager_date.getMonth();
       first_day = date.getDay();
-      for (i = 1; 1 <= first_day ? i <= first_day : i >= first_day; 1 <= first_day ? i++ : i--) {
+      while ((first_day -= 1) > -1) {
         date.go_yesterday();
       }
       html = "";

@@ -80,7 +80,7 @@ class @Calendar
     date.setDate(1)
     month = @pager_date.getMonth()
     first_day = date.getDay()
-    for i in [1..first_day]
+    while (first_day -= 1) > -1
       date.go_yesterday() 
     html = ""
     i = 0
