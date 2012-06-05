@@ -139,8 +139,8 @@
       date = dh(new Date(this.pager_date));
       date.setDate(1);
       month = this.pager_date.getMonth();
-      first_day = date.getDay();
-      while ((first_day -= 1) > -1) {
+      first_day = i = date.getDay();
+      while ((i -= 1) > -1) {
         date.go_yesterday();
       }
       html = "";
