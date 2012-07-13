@@ -112,7 +112,7 @@ class @Calendar
     o=$(event.target)
     o=o.children("A") if o[0].tagName=="TD"
     args = o.data("date").split("-")
-    @date = new Date(args...)
+    @date = new Date(args[0], args[1], args[2])
     # stuff the raw value in the value field
     @field.val(o.data("date"))
     @element.find(".selected").removeClass "selected"

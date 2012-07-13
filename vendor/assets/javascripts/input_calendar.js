@@ -196,11 +196,7 @@
         o = o.children("A");
       }
       args = o.data("date").split("-");
-      this.date = (function(func, args, ctor) {
-        ctor.prototype = func.prototype;
-        var child = new ctor, result = func.apply(child, args), t = typeof result;
-        return t == "object" || t == "function" ? result || child : child;
-      })(Date, args, function(){});
+      this.date = new Date(args[0], args[1], args[2]);
       this.field.val(o.data("date"));
       this.element.find(".selected").removeClass("selected");
       o.parent().addClass("selected");
