@@ -44,12 +44,7 @@
     };
 
     Calendar.prototype.parseIncomingDate = function() {
-      var date, day, month, year, _ref;
-      date = this.field.val().split(" ")[0];
-      _ref = _.map(date.split("-"), function(x) {
-        return parseInt(x.replace(/^0/, ""));
-      }), year = _ref[0], month = _ref[1], day = _ref[2];
-      return new Date(year, month - 1, day);
+      return this.parseDateYMD(this.field.val().split(" ")[0]);
     };
 
     Calendar.prototype.show = function() {
@@ -182,21 +177,26 @@
 
     Calendar.prototype.toDateString = function(date) {
       var day, month;
-      month = date.getMonth();
+      month = date.getMonth() + 1;
       day = date.getDate();
       month = month < 10 ? "0" + month : month;
       day = day < 10 ? "0" + day : day;
       return "" + (date.getFullYear()) + "-" + month + "-" + day;
     };
 
+    Calendar.prototype.parseDateYMD = function(ymd) {
+      var args;
+      args = ymd.split("-");
+      return new Date(args[0], parseInt(args[1], 10) - 1, parseInt(args[2], 10));
+    };
+
     Calendar.prototype.clicked = function(event) {
-      var args, o;
+      var o;
       o = $(event.target);
       if (o[0].tagName === "TD") {
         o = o.children("A");
       }
-      args = o.data("date").split("-");
-      this.date = new Date(args[0], args[1], args[2]);
+      this.date = this.parseDateYMD(o.data("date"));
       this.field.val(o.data("date"));
       this.element.find(".selected").removeClass("selected");
       o.parent().addClass("selected");

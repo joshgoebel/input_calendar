@@ -30,10 +30,7 @@ class @Calendar
   # should override this in a subclass if you're date string looks different
   parseIncomingDate: () ->
     # cut off the time part of the date element
-    date=@field.val().split(" ")[0] 
-    [year, month, day] = _.map(date.split("-"), (x) -> 
-      parseInt x.replace /^0/, "")
-    new Date(year, month-1, day)
+    @parseDateYMD(@field.val().split(" ")[0])
 
   show: () -> @element.show()
   hide: () -> @element.hide()
@@ -102,17 +99,20 @@ class @Calendar
       "<td class='#{classes.join(" ")}'><a data-date='#{@toDateString(date)}' href='#'>#{date.getDate()}</a></td>"
 
   toDateString: (date) ->
-    month = date.getMonth() 
+    month = date.getMonth() + 1
     day = date.getDate()
     month = if month < 10 then "0#{month}" else month
     day = if day < 10 then "0#{day}" else day
     "#{date.getFullYear()}-#{month}-#{day}"
+    
+  parseDateYMD: (ymd) ->
+    args = ymd.split("-")
+    new Date(args[0], parseInt(args[1],10)-1, parseInt(args[2],10))
 
   clicked: (event) ->
     o=$(event.target)
     o=o.children("A") if o[0].tagName=="TD"
-    args = o.data("date").split("-")
-    @date = new Date(args[0], args[1], args[2])
+    @date = @parseDateYMD(o.data("date"))
     # stuff the raw value in the value field
     @field.val(o.data("date"))
     @element.find(".selected").removeClass "selected"
