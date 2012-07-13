@@ -99,15 +99,22 @@ class @Calendar
       classes.push("othermonth") if date.getMonth() != month
       classes.push("today") if date.same_as(new Date())
       classes.push("selected") if date.same_as(@date)
-      "<td class='#{classes.join(" ")}'><a data-date='#{date.toDateString()}' href='#'>#{date.getDate()}</a></td>"
+      "<td class='#{classes.join(" ")}'><a data-date='#{@toDateString(date)}' href='#'>#{date.getDate()}</a></td>"
+
+  toDateString: (date) ->
+    month = date.getMonth() 
+    day = date.getDate()
+    month = if month < 10 then "0#{month}" else month
+    day = if day < 10 then "0#{day}" else day
+    "#{date.getFullYear()}-#{month}-#{day}"
 
   clicked: (event) ->
     o=$(event.target)
     o=o.children("A") if o[0].tagName=="TD"
-    # @date=new Date(@pager_date)
-    # @date.setDate(parseInt(o.html()))
-    @date=new Date(Date.parse(o.data("date")))
-    @field.val(@date.toLocaleDateString())
+    args = o.data("date").split("-")
+    @date = new Date(args...)
+    # stuff the raw value in the value field
+    @field.val(o.data("date"))
     @element.find(".selected").removeClass "selected"
     o.parent().addClass("selected")
     @element.find(".selectedtext").html @generateFooter()
