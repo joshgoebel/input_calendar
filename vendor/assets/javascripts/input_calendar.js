@@ -276,11 +276,15 @@
     };
 
     DateHelper.go_tomorrow = function() {
-      return this.setTime(new Date(this.valueOf() + 1000 * 60 * 60 * 24));
+      var day;
+      day = this.getDate() + 1;
+      return this.setDate(day);
     };
 
     DateHelper.go_yesterday = function() {
-      return this.setTime(new Date(this.valueOf() - 1000 * 60 * 60 * 24));
+      var day;
+      day = this.getDate() - 1;
+      return this.setDate(day);
     };
 
     return DateHelper;

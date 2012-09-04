@@ -169,6 +169,8 @@ class DateHelper
     @getMonth() == date.getMonth() &&
     @getDate() == date.getDate()
   @go_tomorrow = ->
-    @setTime new Date(@valueOf()+1000*60*60*24)
+    day = @getDate()+1
+    @setDate day
   @go_yesterday = ->
-    @setTime new Date(@valueOf()-1000*60*60*24)
+    day = @getDate()-1
+    @setDate day
