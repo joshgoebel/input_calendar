@@ -16,7 +16,7 @@ h1 { font-size:1.2em;}
 div { float:left; width:225px;}
 </style>
 <body>
-  
+      
   <div>
   <h1>Default</h1>
   <input type="text" value="2012-05-21" id="event_date" readonly>
@@ -33,7 +33,14 @@ div { float:left; width:225px;}
   </script>
   </div>
   
-  
+  <div>
+    <h1>Calendar with empty date</h1>
+    <label>Should default to current</label>
+    <input type="text" value="" id="blank_date" readonly>
+    <script>
+    Calendar.attach("blank_date")
+    </script>
+  </div>
   
 </body>
 </html>

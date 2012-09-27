@@ -24,7 +24,9 @@ class @Calendar
     new Calendar(null, field, options)
 
   getDateFromField: () ->
-    return if @field.val() == ""
+    if @field.val() == ""
+      @field.val @toDateString(@date)
+      return
     @date = @parseIncomingDate()
 
   # should override this in a subclass if you're date string looks different

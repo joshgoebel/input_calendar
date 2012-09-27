@@ -38,6 +38,7 @@
 
     Calendar.prototype.getDateFromField = function() {
       if (this.field.val() === "") {
+        this.field.val(this.toDateString(this.date));
         return;
       }
       return this.date = this.parseIncomingDate();
